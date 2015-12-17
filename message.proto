@@ -1,0 +1,31 @@
+package gossip;
+
+enum State {
+    UP = 1;
+    SUSPECT = 2;
+    DOWN = 3;
+}
+
+message PbNode {
+    required string address = 1;
+    required string region = 2;
+
+    required State state = 3;
+
+    required int32 version = 4;
+
+    optional int32 lastseen = 15;
+}
+
+message PbMessage {
+    enum Type {
+        HELLO = 1;
+    }
+
+    required uint32 id = 1;
+
+    required Type type = 2;
+    required PbNode src = 3;
+
+    repeated PbNode neighbors = 4;
+}
